@@ -14,11 +14,13 @@ class DisplayController(threading.Thread):
 		while not(self._exitFlag) :
 			timeString = time.strftime("%H:%M:%S")
 			dateString = time.strftime("%d-%m")
+			self._displayStringLock.acquire()
 			print(timeString + "  " + dateString + " : " + self._displayString)
+			self._displayStringLock.release()
 			time.sleep(1)
 		print("Exiting thread " + self.name)
 
-	def setDisplayString(self, displayString): #Make a property out of this
+	def setDisplayString(self, displayString):
 		self._displayStringLock.acquire()
 		self._displayString = displayString
 		self._displayStringLock.release()

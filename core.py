@@ -21,21 +21,18 @@ class Core () :
 	def displayString(self, string):
 		self.displaycontroller.setDisplayString(string)
 
-
 	@property
 	def myActivity(self):
-		return self.__myActivity
+		return self._myActivity
 
 	@myActivity.setter
-	def myActivity(self, activity):
+	def myActivity(self,activity):
 		activity.core = self
-		self.__myActivity =activity
-
+		self._myActivity = activity
 
 	def start(self):
 		self.keyWatcher.start()
 		self.displayController.start()
-
 		self.displayController.join()
 
 	def exit(self):
