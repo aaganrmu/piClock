@@ -1,2 +1,4 @@
 # piClock
-Rebuilding an alarm clock using a Raspberry Pi
+Rebuilding an alarm clock using a Raspberry Pi.
+
+Uses python.
