@@ -2,7 +2,7 @@ import time
 from keywatcher import *
 from displaycontroller import *
 from core import *
-#	exec(open("C:\\MEUK\\Python\\Klok\\main.py").read())
+#	exec(open("C:\\MEUK\\Python\\piClock\\main.py").read())
 
 
 core = Core()

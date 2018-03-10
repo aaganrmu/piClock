@@ -9,8 +9,9 @@ class KeyWatcher(threading.Thread):
 		self.lastKey = 0;
 		self._targets = []
 		self._targetsLock = threading.RLock()
+
 	def run(self):
-		print("Starting" + self.name)
+		print("Starting " + self.name)
 		self._exitFlag = False
 		while not(self._exitFlag) :
 			keyPressed = ord(msvcrt.getch())
@@ -29,4 +30,4 @@ class KeyWatcher(threading.Thread):
 
 	def exit(self):
 		self._exitFlag = True
-		print("ExitFlag KeyWatcher set")
+		print("ExitFlag set for " + self.name)

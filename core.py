@@ -5,7 +5,7 @@ from displaycontroller import *
 class Core () :
 	def __init__(self):	
 		print("New Core")
-		self.myActivity = showTimeActivity()
+		self.myActivity = ShowTimeActivity()
 
 		self.keyWatcher = KeyWatcher(1,"keyWatcherThread")
 		self.keyWatcher.addTarget(self)
@@ -19,7 +19,15 @@ class Core () :
 			self.exit()
 
 	def displayString(self, string):
-		self.displaycontroller.setDisplayString(string)
+		self.displayController.setDisplayString(string)
+
+	def displayAttributes(self, leftDot = None, rightDot = None, colon = None) :
+		if not leftDot is None :
+			self.displayController.leftDot = leftDot
+		if not rightDot is None :
+			self.displayController.rightDot = rightDot
+		if not colon is None :
+			self.displayController.colon = colon
 
 	@property
 	def myActivity(self):
@@ -27,6 +35,8 @@ class Core () :
 
 	@myActivity.setter
 	def myActivity(self,activity):
+		if hasattr(self, '_myActivity') :
+			self._myActivity.exit()
 		activity.core = self
 		self._myActivity = activity
 
@@ -36,5 +46,6 @@ class Core () :
 		self.displayController.join()
 
 	def exit(self):
+		self.myActivity.exit()
 		self.displayController.exit()
 		self.keyWatcher.exit()
