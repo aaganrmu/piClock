@@ -5,10 +5,10 @@ import time
 class Activity :
 	def __init__(self) :
 		print("New Activity")
-		self.core = []
+		self.core = None
 
 	def reactToButton(self, button) :
-		print(button)
+		print("Activity sees key: " +  str(button))
 
 	def exit(self) :
 		pass
@@ -30,6 +30,7 @@ class TimeKeeper(threading.Thread) :
 			if not self.target is None :
 				self.target.reactToTime()
 			time.sleep(self.sleepTime)
+			print("Sleepytime")
 		print("Exiting thread " + self.name)
 
 	def exit(self) :
@@ -42,19 +43,20 @@ class ShowTimeActivity(Activity):
 	def __init__(self) :
 		super(ShowTimeActivity,self).__init__()
 		self.colon = False
-		self.timeKeeper = TimeKeeper(3,'TimeKeeperThread')
-		self.timeKeeper.sleepTime = 1
-		self.timeKeeper.target = self
-		self.timeKeeper.start()
+		# self.timeKeeper = TimeKeeper(3,'TimeKeeperThread')
+		# self.timeKeeper.sleepTime = 1
+		# self.timeKeeper.target = self
+		# self.timeKeeper.start()
 
 	def exit(self) :
 		super(ShowTimeActivity,self).exit()
-		self.timeKeeper.exit()
+		# self.timeKeeper.exit()
 
 	def reactToButton(self,button) :
 		super(ShowTimeActivity,self).reactToButton(button)
 
 	def reactToTime(self) :
-		self.core.displayString(time.strftime("%H%M"))
-		self.core.displayAttributes(colon = self.colon)
-		self.colon = not self.colon
+		if not self.core is None :
+			self.core.displayString(time.strftime("%H%M"))
+			self.core.displayAttributes(colon = self.colon)
+			self.colon = not self.colon

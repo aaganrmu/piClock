@@ -1,4 +1,4 @@
-import msvcrt
+import getch
 import threading
 
 class KeyWatcher(threading.Thread):
@@ -14,9 +14,9 @@ class KeyWatcher(threading.Thread):
 		print("Starting " + self.name)
 		self._exitFlag = False
 		while not(self._exitFlag) :
-			keyPressed = ord(msvcrt.getch())
+			keyPressed = ord(getch.getch())
 			if keyPressed ==224 or keyPressed == 0:
-				keyPressed =ord(msvcrt.getch())
+				keyPressed =ord(getch.getch())
 			self.lastKey = keyPressed
 			if len(self._targets) > 0 :
 				for target in self._targets :
